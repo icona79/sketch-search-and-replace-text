@@ -1,0 +1,53 @@
+{
+    "name": "sketch-search-and-replace-text",
+    "description": "Search and replace text in Text layers and Symbol overrides",
+    "version": "0.0.1",
+    "engines": {
+        "sketch": ">=3.0",
+        "node": "16.15.0"
+    },
+    "skpm": {
+        "name": "Sketch search and replace text",
+        "manifest": "src/manifest.json",
+        "main": "sketch-search-and-replace-text.sketchplugin",
+        "assets": [
+            "assets/**/*"
+        ],
+        "sketch-assets-file": "sketch-assets/icons.sketch"
+    },
+    "scripts": {
+        "build": "skpm-build",
+        "watch": "skpm-build --watch",
+        "start": "skpm-build --watch",
+        "postinstall": "npm run build && skpm-link"
+    },
+    "devDependencies": {
+        "@skpm/builder": "^0.8.0",
+        "@skpm/extract-loader": "^2.0.2",
+        "@types/node": "^18.7.15",
+        "css-loader": "^3.2.0",
+        "html-loader": "^0.5.5",
+        "prettier": "2.2.1"
+    },
+    "resources": [
+        "resources/**/*.js"
+    ],
+    "dependencies": {
+        "@skpm/dialog": "^0.4.2",
+        "@skpm/fs": "^0.2.6",
+        "img": "^3.0.3",
+        "node-fetch": "^2.6.7",
+        "object-path": "^0.11.8",
+        "parse-json": "^6.0.2",
+        "path": "0.12.7",
+        "platform-folders": "^0.6.0",
+        "sketch-module-web-view": "^3.5.1",
+        "smart-deep-sort": "^1.0.2",
+        "sort-object": "^3.0.3"
+    },
+    "author": "Matteo Gratton <icona79@gmail.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/icona79/search-and-replace-text.git"
+    }
+}

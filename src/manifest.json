@@ -1,0 +1,23 @@
+{
+    "compatibleVersion": 3,
+    "bundleVersion": 1,
+    "commands": [
+        {
+            "name": "🔎 Search and replace text",
+            "identifier": "script",
+            "script": "./script.js",
+            "handlers": {
+                "run": "onRun",
+                "actions": {
+                    "Shutdown": "onShutdown"
+                }
+            }
+        }
+    ],
+    "menu": {
+        "title": "🔎 Search and replace text",
+        "items": ["script"],
+        "isRoot": true
+    },
+    "icon": "icon.png"
+}
