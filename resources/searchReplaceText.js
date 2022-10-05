@@ -1,7 +1,7 @@
 // disable the context menu (eg. the right click menu) to have a more native feel
-document.addEventListener("contextmenu", (e) => {
-    e.preventDefault();
-});
+// document.addEventListener("contextmenu", (e) => {
+//     e.preventDefault();
+// });
 
 // call the plugin from the webview
 // document.getElementById('button').addEventListener('click', () => {
@@ -40,6 +40,10 @@ document.getElementById("parametersSubmit").addEventListener("click", () => {
     if (document.querySelector('input[name="caseSensitive"]:checked')) {
         isCaseSensitive = true;
     }
+    var isExactMatch = false;
+    if (document.querySelector('input[name="exactMatch"]:checked')) {
+        isExactMatch = true;
+    }
     var replaceText = document.getElementById("replaceText").value;
     var parameters = {
         searchArea: searchArea,
@@ -47,10 +51,11 @@ document.getElementById("parametersSubmit").addEventListener("click", () => {
         performSymbolInstances: performSymbolInstances,
         searchText: searchText,
         isCaseSensitive: isCaseSensitive,
+        isExactMatch: isExactMatch,
         replaceText: replaceText,
     };
 
-    // console.log(parameters);
+    console.log(parameters);
 
     window.postMessage("nativeLog", parameters);
 });

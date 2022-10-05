@@ -10,6 +10,67 @@
     <body>
         <div class="view">
             <div id="parameters">
+                <div id="search" class="">
+                    <p>Find text</p>
+                    <div class="fields">
+                        <form action="" class="formWithControls">
+                            <label
+                                class="form-control-with-controls"
+                                for="searchArea"
+                            >
+                                <input
+                                    type="text"
+                                    id="searchText"
+                                    name="searchText"
+                                    placeholder="Insert the text you want to find"
+                                    checked
+                                />
+                            </label>
+                            <label
+                                class="form-control fieldLabel"
+                                for="caseSensitive"
+                                id="labelCaseSensitive"
+                            >
+                                <input
+                                    type="checkbox"
+                                    id="caseSensitive"
+                                    name="caseSensitive"
+                                    checked
+                                />
+                                Case Sensitive
+                            </label>
+                            <label
+                                class="form-control fieldLabel"
+                                for="exactMatch"
+                                id="labelExactMatch"
+                            >
+                                <input
+                                    type="checkbox"
+                                    id="exactMatch"
+                                    name="exactMatch"
+                                    checked
+                                />
+                                Exact Match
+                            </label>
+                        </form>
+                    </div>
+                </div>
+                <div id="replace" class="">
+                    <p>Replace with</p>
+                    <div class="fields">
+                        <form action="">
+                            <label class="form-control" for="replaceArea">
+                                <input
+                                    type="text"
+                                    id="replaceText"
+                                    name="replaceText"
+                                    placeholder="Insert new text"
+                                    checked
+                                />
+                            </label>
+                        </form>
+                    </div>
+                </div>
                 <div id="searchArea" class="">
                     <p>Search area</p>
                     <div class="selection">
@@ -85,59 +146,20 @@
                         </form>
                     </div>
                 </div>
-                <div id="search" class="">
-                    <p>Search text</p>
-                    <div class="fields">
-                        <form action="">
-                            <label class="form-control" for="searchArea">
-                                <input
-                                    type="text"
-                                    id="searchText"
-                                    name="searchText"
-                                    placeholder="Search"
-                                    checked
-                                />
-                            </label>
-                            <label class="form-control" for="caseSensitive">
-                                <input
-                                    type="checkbox"
-                                    id="caseSensitive"
-                                    name="caseSensitive"
-                                    checked
-                                />
-                                Case Sensitive
-                            </label>
-                        </form>
-                    </div>
-                </div>
-                <div id="replace" class="">
-                    <p>Replace your text with</p>
-                    <div class="fields">
-                        <form action="">
-                            <label class="form-control" for="replaceArea">
-                                <input
-                                    type="text"
-                                    id="replaceText"
-                                    name="replaceText"
-                                    placeholder="Replace Text"
-                                    checked
-                                />
-                            </label>
-                        </form>
-                    </div>
-                </div>
             </div>
             <footer>
                 <div class="footer-background">
+                    <button class="secondary" id="find">Find next</button>
+                    <button class="secondary" id="replace">Replace</button>
                     <button class="primary" id="parametersSubmit">
-                        Create button
+                        Find and Replace
                     </button>
                 </div>
             </footer>
         </div>
         <!-- notice the "../resources_" here. It's because webview.js will be compiled in a different folder with the prefix. -->
-        <script src="../resources_webview.js"></script>
+        <script src="../resources_searchReplaceText.js"></script>
         <!-- Just to test it in a Browser -->
-        <!-- <script src="./webview.js"></script> -->
+        <!-- <script src="./searchReplaceText.js"></script> -->
     </body>
 </html>

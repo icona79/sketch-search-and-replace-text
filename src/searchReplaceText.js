@@ -65,12 +65,13 @@ export default function () {
         }
     });
 
-    browserWindow.loadURL(require("../resources/webview.html"));
+    browserWindow.loadURL(require("../resources/searchReplaceText.html"));
 }
 
 // const outOfSync = !!layer.sharedStyleId && layer.style.isOutOfSyncWithSharedStyle(layer.sharedStyle)
 
 function replaceText(parameters) {
+    console.log(parameters);
     let searchFilter = parameters.searchArea;
     let filterParameter = "document";
     let textLayers = [];
@@ -90,39 +91,44 @@ function replaceText(parameters) {
     }
 
     let isCaseSensitive = parameters.isCaseSensitive;
+    let isExactMatch = parameters.isExactMatch;
 
     let searchText = parameters.searchText;
     let replaceText = parameters.replaceText;
 
-    console.log(textLayers);
-    console.log(instances);
-
     if (parameters.performSymbolInstances && instances.length > 0) {
+        console.log("Perform over overrides");
         instances.forEach((instance) => {
             let overrides = instance.overrides;
 
             overrides.forEach((override) => {
                 if (
                     override.property === "stringValue" &&
-                    override.editable === true &&
-                    override.isDefault === false
+                    override.editable === true
                 ) {
+                    console.log("Parameter found: " + override.value);
                     if (
-                        (isCaseSensitive && override.value === searchText) ||
-                        (!isCaseSensitive &&
-                            override.value.toUpperCase() ===
-                                searchText.toUpperCase())
+                        isExactMatch &&
+                        exactMatch(searchText, override.value)
                     ) {
-                        override.value = replaceText;
+                        console.log("Override exact match");
+                        let newText = override.value.replace(
+                            searchText,
+                            replaceText
+                        );
+                        console.log(newText);
+                        override.value = newText;
                     } else if (
                         (isCaseSensitive &&
-                            override.value.includes(searchText)) ||
+                            matchesCase(searchText, override.value)) ||
                         (!isCaseSensitive &&
-                            override.value
-                                .toUpperCase()
-                                .includes(searchText.toUpperCase()))
+                            matches(searchText, override.value))
                     ) {
-                        override.value.replace(searchText, replaceText);
+                        let newText = override.value.replace(
+                            searchText,
+                            replaceText
+                        );
+                        override.value = newText;
                     }
                 }
             });
@@ -131,20 +137,15 @@ function replaceText(parameters) {
 
     if (parameters.performTextLayers && textLayers.length > 0) {
         textLayers.forEach((textLayer) => {
-            if (
-                (isCaseSensitive && textLayer.text === searchText) ||
-                (!isCaseSensitive &&
-                    textLayer.text.toUpperCase() === searchText.toUpperCase())
-            ) {
-                textLayer.text = replaceText;
+            if (isExactMatch && exactMatch(searchText, textLayer.text)) {
+                let newText = textLayer.text.replace(searchText, replaceText);
+                textLayer.text = newText;
             } else if (
-                (isCaseSensitive && textLayer.text.includes(searchText)) ||
-                (!isCaseSensitive &&
-                    textLayer.text
-                        .toUpperCase()
-                        .includes(searchText.toUpperCase()))
+                (isCaseSensitive && matchesCase(searchText, textLayer.text)) ||
+                (!isCaseSensitive && matches(searchText, textLayer.text))
             ) {
-                textLayer.text.replace(searchText, replaceText);
+                let newText = textLayer.text.replace(searchText, replaceText);
+                textLayer.text = newText;
             }
         });
     }
@@ -187,6 +188,19 @@ function layerList(layers, type = "Text") {
     } else if (type === "SymbolInstance") {
         return instances;
     }
+}
+
+function matches(value, search) {
+    return search.toLowerCase().indexOf(value.toLowerCase()) > -1;
+}
+
+function matchesCase(value, search) {
+    return search.indexOf(value) > -1;
+}
+
+function exactMatch(value, search) {
+    let match = value.match(search);
+    return match && search === match[0];
 }
 
 // ******************************************************************* //

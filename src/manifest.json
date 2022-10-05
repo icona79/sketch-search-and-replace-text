@@ -5,7 +5,7 @@
         {
             "name": "🔎 Search and replace text",
             "identifier": "script",
-            "script": "./script.js",
+            "script": "./searchReplaceText.js",
             "handlers": {
                 "run": "onRun",
                 "actions": {

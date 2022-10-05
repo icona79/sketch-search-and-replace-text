@@ -1,6 +1,6 @@
 {
-    "name": "sketch-search-and-replace-text",
-    "description": "Search and replace text in Text layers and Symbol overrides",
+    "name": "sketch-search-and-replace",
+    "description": "Search and replace in batch all around Sketch",
     "version": "0.0.2-1",
     "engines": {
         "sketch": ">=3.0",

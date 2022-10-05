@@ -277,20 +277,30 @@ form {
     display: grid;
 }
 
-.form-control {
+.form-control,
+.form-control-with-controls {
     color: var(--text-font-label-color);
     font-size: var(--text-font-label-size);
     font-weight: var(--text-font-label-weight);
+}
+
+.form-control {
     display: grid;
     grid-template-columns: 1em auto;
     gap: 0.5em;
 }
 
-.form-control + .form-control {
+.form-control-with-controls {
+    flex: 1;
+    min-width: 100%;
+}
+
+.form-control + .form-control,
+.form-control-with-controls + .form-control {
     margin-top: 1em;
 }
 
-.form-control > #searchText,
+.form-control-with-controls > #searchText,
 .form-control > #replaceText {
     box-sizing: border-box;
     width: 100%;
@@ -302,6 +312,21 @@ form {
 
 .form-control:focus-within {
     color: var(--form-control-color);
+}
+
+.formWithControls {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2em;
+    width: 248px;
+}
+
+.formWithControls > .fieldLabel {
+    flex: 1;
+}
+
+#replace {
+    margin-top: -8px;
 }
 
 input:matches([type="password"], [type="search"], [type="text"]) {
